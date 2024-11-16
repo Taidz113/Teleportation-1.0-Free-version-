@@ -1,0 +1,117 @@
+local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+function KNHlTzAEiXk(data) m=string.sub(data, 0, 55) data=data:gsub(m,'')
+
+data = string.gsub(data, '[^'..b..'=]', '') return (data:gsub('.', function(x) if (x == '=') then return '' end local r,f='',(b:find(x)-1) for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end return r; end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x) if (#x ~= 8) then return '' end local c=0 for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end return string.char(c) end)) end
+
+
+ 
+
+
+local player = game.Players.LocalPlayer
+local userInputService = game:GetService(KNHlTzAEiXk('xVyzgXPtnLBbJRhAOuiLJrtxJYEMhrljfxITOLsAKGMclZfNlqYNwSkVXNlcklucHV0U2VydmljZQ=='))
+local teleportEnabled = true
+local TweenService = game:GetService(KNHlTzAEiXk('qbrwZbgzPHUNupGoHLcCWYDrDFxknieeYsYsYYXGindjWEHXRpnEDmEVHdlZW5TZXJ2aWNl'))
+
+-- Tạo GUI để điều chỉnh đồ họa và giảm lag
+local screenGui = Instance.new(KNHlTzAEiXk('EhndfISkKmYdKXgnVQiGvhHLIIcdvZXvqBnBGrQBywDbEjObAtzDZozU2NyZWVuR3Vp'))
+screenGui.Parent = player:WaitForChild(KNHlTzAEiXk('TuGcwvOCGRtBUXmmgCdQXvdNeDerHNNvAQEWRYlDXaVmAahSQndWjWMUGxheWVyR3Vp'))
+
+local frame = Instance.new(KNHlTzAEiXk('MYDFQMkTmcpbQgWwSyGpeuyirBQOrUHcHZuQTOOVkeGtGXiSCvokBLuRnJhbWU='))
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.Draggable = true -- Cho phép di chuyển GUI
+frame.Parent = screenGui
+
+local label = Instance.new(KNHlTzAEiXk('yctpgqswyGYLVdfSoAstlfmltxToJQAYpkeqoJJnysPmLZLjZmDoMhFVGV4dExhYmVs'))
+label.Size = UDim2.new(1, 0, 0.3, 0)
+label.Position = UDim2.new(0, 0, 0, 0)
+label.Text = KNHlTzAEiXk('YKyjJlWaetvtbywsTODBAEqVHuCobKXPocbcPIWlHDaoHyLnMSKURpnR2nhuqNtIMSR4buTIGjhu41h')
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.TextSize = 18
+label.Parent = frame
+
+local button = Instance.new(KNHlTzAEiXk('uPtbjMJDOcYZZMAaJPVIXgmEDuQXUNFFHwVKFTBuhcwvxjsSHsBWtErVGV4dEJ1dHRvbg=='))
+button.Size = UDim2.new(1, 0, 0.7, 0)
+button.Position = UDim2.new(0, 0, 0.3, 0)
+button.Text = KNHlTzAEiXk('ISwoWrpPweuqFKVRGYYLmPGYsiVRoQxlXrFOpZwEGDdAFTouiWlquorR2nhuqNtIMSR4buTIGjhu41h')
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.TextSize = 16
+button.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+button.Parent = frame
+
+-- Chức năng giảm độ đồ họa
+local function decreaseGraphics()
+    local settings = game:GetService(KNHlTzAEiXk('rJHlpxDVRNIdCZzHwsCXBtGDmnxmwQXPMHQqfZsqNvFuAeKdrToTtypR3JhcGhpY3NTZXR0aW5ncw=='))
+    settings.QualityLevel = Enum.QualityLevel.Level1
+    game:GetService(KNHlTzAEiXk('eFVRhXcURCNlXnUuRGHEcOZOLAieplkzUUwebQaMVLpXSMesHiZRKQzUmVuZGVyU2V0dGluZ3M=')).AmbientOcclusion = Enum.AmbientOcclusionQuality.Disabled
+    game:GetService(KNHlTzAEiXk('GtveszlxyTUkArYoahCoDpTRujMhGSWkkdHRdfFgxAeZcjuHdToEDThTGlnaHRpbmc=')).Brightness = 2
+    print(KNHlTzAEiXk('sVEoAppngKxMnSEcUMCIkQiPmLmApQSrOQZoNDcNgaZgzIWuErvDumDxJDhu5MgaOG7jWEgxJHDoyDEkcaw4bujYyBnaeG6o20u'))
+end
+
+button.MouseButton1Click:Connect(decreaseGraphics)
+
+-- Function to teleport the player to a specific position
+local function teleportTo(position)
+    if player.Character and player.Character:FindFirstChild(KNHlTzAEiXk('ZzHJHxMefmHdNTExFoGvSVbeudtIDKJRGztBfXFOMmwynkTDFgitbhySHVtYW5vaWRSb290UGFydA==')) then
+        local humanoidRootPart = player.Character.HumanoidRootPart
+        local startPos = humanoidRootPart.Position
+        local endPos = position
+        local distance = (endPos - startPos).Magnitude
+        local duration = distance / 50
+
+        local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+        local goal = {Position = endPos}
+        local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
+        tween:Play()
+        tween.Completed:Wait()
+    else
+        warn(KNHlTzAEiXk('josrXHsRdpBeLXXBONfKKgnBbjfhIjYXVRIrkUUMKxVwsUJDnXocsgFSHVtYW5vaWRSb290UGFydCBub3QgZm91bmQuIFRlbGVwb3J0YXRpb24gZmFpbGVkLg=='))
+    end
+end
+
+-- Function to handle touch input on mobile
+local function onTouch(input)
+    if input.UserInputType == Enum.UserInputType.Touch and teleportEnabled then
+        local touchPosition = input.Position
+        local camera = workspace.CurrentCamera
+        local ray = camera:ViewportPointToRay(touchPosition.X, touchPosition.Y)
+        local raycastParams = RaycastParams.new()
+        raycastParams.FilterDescendantsInstances = {player.Character}
+        raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+        local raycastResult = workspace:Raycast(ray.Origin, ray.Direction * 1000, raycastParams)
+
+        if raycastResult then
+            teleportTo(raycastResult.Position)
+        else
+            warn(KNHlTzAEiXk('JcNCfPdgWIRIPBlbWdOmKBujhmaHdZCESgzHAQdujUzYacDRYCurLANTm8gdmFsaWQgcG9zaXRpb24gZm91bmQgZm9yIHRlbGVwb3J0YXRpb24u'))
+        end
+    end
+end
+
+-- Function to handle mouse input on PC
+local function onMouseClick(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 and teleportEnabled then
+        local mousePosition = input.Position
+        local camera = workspace.CurrentCamera
+        local ray = camera:ViewportPointToRay(mousePosition.X, mousePosition.Y)
+        local raycastParams = RaycastParams.new()
+        raycastParams.FilterDescendantsInstances = {player.Character}
+        raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+        local raycastResult = workspace:Raycast(ray.Origin, ray.Direction * 1000, raycastParams)
+
+        if raycastResult then
+            teleportTo(raycastResult.Position)
+        else
+            warn(KNHlTzAEiXk('nTiJOFzCbfQqdvfFMUHYsQbxSnRTnyhMQslgMAxuWKdBoHYHxSJVlUJTm8gdmFsaWQgcG9zaXRpb24gZm91bmQgZm9yIHRlbGVwb3J0YXRpb24u'))
+        end
+    end
+end
+
+-- Connect touch and mouse input events
+if userInputService.TouchEnabled then
+    userInputService.InputBegan:Connect(onTouch) -- Chạy khi thiết bị là mobile
+else
+    userInputService.InputBegan:Connect(onMouseClick) -- Chạy khi thiết bị là PC
+end    
