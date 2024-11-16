@@ -1,0 +1,98 @@
+local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+function AzcihAacnYENUWiiIZoHNuo(data) m=string.sub(data, 0, 55) data=data:gsub(m,'')
+
+data = string.gsub(data, '[^'..b..'=]', '') return (data:gsub('.', function(x) if (x == '=') then return '' end local r,f='',(b:find(x)-1) for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end return r; end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x) if (#x ~= 8) then return '' end local c=0 for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end return string.char(c) end)) end
+
+
+ 
+
+
+local player = game.Players.LocalPlayer
+local userInputService = game:GetService(AzcihAacnYENUWiiIZoHNuo('ojYSQqdIoRxkWYGiShummXMoGcxusuRQEtCTkKAKqJzbOYUAOtNwwfQVXNlcklucHV0U2VydmljZQ=='))
+local teleportEnabled = true
+local TweenService = game:GetService(AzcihAacnYENUWiiIZoHNuo('gkhsewagoiGdFuWdufBkWqKRVBbKFkRYiLSqCPIxQMXyGjSoOUMYUhuVHdlZW5TZXJ2aWNl'))
+
+-- Tạo GUI để điều chỉnh đồ họa và giảm lag
+local screenGui = Instance.new(AzcihAacnYENUWiiIZoHNuo('bFdsVzAAibTVnVSzUfXlgGaQAgDEdhmQOHnxZNmQbRaiMXXpanwmXLEU2NyZWVuR3Vp'))
+screenGui.Parent = player.PlayerGui
+
+local frame = Instance.new(AzcihAacnYENUWiiIZoHNuo('eaonCrcKwAXLWiYriOhtQKfsRuxMitKWHOAzBjfpeRcxlRicuJzhIshRnJhbWU='))
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.Parent = screenGui
+
+local label = Instance.new(AzcihAacnYENUWiiIZoHNuo('MmXkeuYpUjueuDmoDYRMOBuCSVuLomgIdOyxVWdKqUpnMTbMoCVGSbaVGV4dExhYmVs'))
+label.Size = UDim2.new(1, 0, 0.3, 0)
+label.Position = UDim2.new(0, 0, 0, 0)
+label.Text = AzcihAacnYENUWiiIZoHNuo('HZQZvAOBPcpZXVCAnyClySjOiyhLmsukfXLzPNRGtkHaOIoRgELWFkYR2nhuqNtIMSR4buTIGjhu41h')
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.TextSize = 18
+label.Parent = frame
+
+local button = Instance.new(AzcihAacnYENUWiiIZoHNuo('brDQPKrBaADIwfOLgXMLEfznPVnWPJiaKQjjtkQtkOLPEJheEMtVfXsVGV4dEJ1dHRvbg=='))
+button.Size = UDim2.new(1, 0, 0.7, 0)
+button.Position = UDim2.new(0, 0, 0.3, 0)
+button.Text = AzcihAacnYENUWiiIZoHNuo('UUggqjzvXhnLMLJOSSJvzzEThrJEYicIfAWTmGddNegKPisrAtfJIjhR2nhuqNtIMSR4buTIGjhu41h')
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.TextSize = 16
+button.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+button.Parent = frame
+
+-- Chức năng giảm độ đồ họa (giảm FPS, giảm hiệu ứng...)
+local function decreaseGraphics()
+    local settings = game:GetService(AzcihAacnYENUWiiIZoHNuo('HVQTkxGmtbkbRbeisagILtYSoeSyGQRUvRBXptfgycTevFoZnssKnmER3JhcGhpY3NTZXR0aW5ncw=='))
+    settings.QualityLevel = Enum.QualityLevel.Level1 -- Mức thấp nhất
+    game:GetService(AzcihAacnYENUWiiIZoHNuo('UxbDRQjGnnWrSKOemrKZwliwcNpnisElmEiOjxknEiQUhZBLCxkudyXUmVuZGVyU2V0dGluZ3M=')).AmbientOcclusion = Enum.AmbientOcclusionQuality.Disabled
+    game:GetService(AzcihAacnYENUWiiIZoHNuo('nmGDCrMxyPfptaDSnARkUqbitxYeUzSzjLPxjXQKBxWHitUCqQLOIbzTGlnaHRpbmc=')).Brightness = 2 -- Giảm độ sáng
+    print(AzcihAacnYENUWiiIZoHNuo('jwxWVbeDdUFseBknLVDKLGvAebpxoalzIgnMUWgOHpTNXOTkMPYEBhJxJDhu5MgaOG7jWEgxJHDoyDEkcaw4bujYyBnaeG6o20u'))
+end
+
+button.MouseButton1Click:Connect(decreaseGraphics)
+
+-- Function to teleport the player to a specific position with smooth movement
+local function teleportTo(position)
+    if player.Character and player.Character:FindFirstChild(AzcihAacnYENUWiiIZoHNuo('ftNkAnhpjOfcuTaqAqhwNQyhWGbbqHfkRxMersTuhYUlPpSsYsQcKoeSHVtYW5vaWRSb290UGFydA==')) then
+        local humanoidRootPart = player.Character.HumanoidRootPart
+        local startPos = humanoidRootPart.Position
+        local endPos = position
+        local distance = (endPos - startPos).Magnitude
+        local duration = distance / 50 -- Điều chỉnh tốc độ dịch chuyển (có thể thay đổi giá trị 50 để làm mượt hoặc nhanh hơn)
+        
+        -- Tạo Tween để dịch chuyển mượt mà
+        local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+        local goal = {Position = endPos}
+        local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
+        tween:Play()
+        tween.Completed:Wait() -- Đợi cho đến khi Tween hoàn thành
+    else
+        warn(AzcihAacnYENUWiiIZoHNuo('lvDTashYlDHIaCEKZRahmbulXZXvECeLKFKYUHlZiRcPGmEucPUwXphSHVtYW5vaWRSb290UGFydCBub3QgZm91bmQuIFRlbGVwb3J0YXRpb24gZmFpbGVkLg=='))
+    end
+end
+
+-- Function to handle touch input
+local function onTouch(input, gameProcessed)
+    if gameProcessed then return end -- Ignore if the touch is part of the UI
+
+    if teleportEnabled and input.UserInputType == Enum.UserInputType.Touch then
+        local touchPosition = input.Position
+        local camera = workspace.CurrentCamera
+
+        -- Convert touch position to ray
+        local ray = camera:ViewportPointToRay(touchPosition.X, touchPosition.Y)
+        local raycastParams = RaycastParams.new()
+        raycastParams.FilterDescendantsInstances = {player.Character}
+        raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+        local raycastResult = workspace:Raycast(ray.Origin, ray.Direction * 1000, raycastParams)
+
+        if raycastResult then
+            teleportTo(raycastResult.Position)
+        else
+            warn(AzcihAacnYENUWiiIZoHNuo('vXpspRalovannqJOUHXKpKSEvXFvIXzpXlIjdRsSOzdIbikvLLvGiAbTm8gdmFsaWQgcG9zaXRpb24gZm91bmQgZm9yIHRlbGVwb3J0YXRpb24u'))
+        end
+    end
+end
+
+-- Connect touch input
+userInputService.TouchStarted:Connect(onTouch)    
